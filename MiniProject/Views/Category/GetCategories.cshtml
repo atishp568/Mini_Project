@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MiniProject.Models.Category>
+
+
+<h2 class="text-center p-3">Manage Categories</h2>
+
+<table class="table table-bordered text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            <a href="@Url.Action("EditCategory", "Category", new { id=item.CategoryId })" class="btn btn-primary">Edit</a>
+            
+            <a href="@Url.Action("DeleteCategory", "Category", new { id=item.CategoryId })" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+}
+
+</table>
+

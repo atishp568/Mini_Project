@@ -1,0 +1,63 @@
+﻿@model List<MiniProject.Models.Product>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center p-5">Manage Products</h2>
+
+<table class="table table-bordered text-center">
+    <tr class="table-dark">
+        <th>
+            ProductId
+        </th>
+        <th>
+            ProductName
+        </th>
+        <th>
+            CategoryId
+        </th>
+        <th>
+            CategoryName
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a href="@Url.Action("EditProduct", "Product", new { id = item.ProductId })" class="btn btn-warning">Edit</a>
+                <a href="@Url.Action("DeleteProduct", "Product", new { id = item.ProductId })" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="d-flex justify-content-end align-items-center">
+    @if (ViewBag.Currentpage > 1)
+    {
+        <a href="@Url.Action("GetProducts", new {page= ViewBag.Currentpage - 1, pagesize= ViewBag.Pagesize})" class="btn btn-outline-primary">Previous</a>
+    }
+<div class="p-2">Page @ViewBag.Currentpage</div>
+    @if (Model.Count == ViewBag.Pagesize)
+    {
+        <a href="@Url.Action("GetProducts", new {page= ViewBag.Currentpage + 1, pagesize= ViewBag.Pagesize})" class="btn btn-outline-primary">Next</a>
+    }
+</div>
+
